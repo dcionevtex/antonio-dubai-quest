@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/diegocione/.claude/**)",
+      "WebFetch(domain:claude.com)",
+      "Bash(gh api:*)"
+    ]
+  }
+}
