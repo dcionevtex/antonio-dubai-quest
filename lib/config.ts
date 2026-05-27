@@ -25,7 +25,7 @@ export const TRIP_CONFIG = {
   destination: 'Dubai',
 
   // 🗓️  TROQUE A DATA AQUI:
-  tripDate: new Date('2026-06-26T10:00:00-03:00'),
+  tripDate: new Date('2026-06-25T10:00:00-03:00'),
 
   // Data de início da contagem regressiva (para % de progresso)
   // Pode deixar como está ou trocar para quando você anunciou a viagem
