@@ -52,22 +52,6 @@ export const TRIP_CONFIG = {
       special: false,
     },
     {
-      id: 'swimwear',
-      icon: '🩱',
-      title: 'Roupa de Piscina',
-      description: 'A piscina do hotel não vai saber o que vai acontecer.',
-      date: '',
-      completed: false,
-    },
-    {
-      id: 'sunscreen',
-      icon: '🧴',
-      title: 'Protetor Solar',
-      description: 'Dubai no verão. FPS 50. No mínimo.',
-      date: '',
-      completed: false,
-    },
-    {
       id: 'doha-surprise',
       icon: '🌙',
       title: 'Destino Surpresa Desbloqueado',
