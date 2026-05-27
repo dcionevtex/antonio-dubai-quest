@@ -8,6 +8,7 @@ import { DailyImage } from './DailyImage'
 import { CountdownBlock } from './CountdownBlock'
 import { ProgressBar } from './ProgressBar'
 import { Messages } from './Messages'
+import { Milestones } from './Milestones'
 
 interface TimeLeft {
   days: number
@@ -255,6 +256,9 @@ export function ClientApp() {
               </div>
             ))}
           </section>
+
+          {/* ── Milestones ────────────────────────────────────────────── */}
+          <Milestones />
 
           {/* ── Rotating messages ─────────────────────────────────────── */}
           <section className="animate-fade-in" style={{ animationDelay: '0.9s' }}>

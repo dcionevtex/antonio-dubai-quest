@@ -30,4 +30,15 @@ export const TRIP_CONFIG = {
   // Data de início da contagem regressiva (para % de progresso)
   // Pode deixar como está ou trocar para quando você anunciou a viagem
   missionStartDate: new Date('2026-04-15T00:00:00-03:00'),
+
+  // Conquistas concluídas — adicione novas aqui conforme forem desbloqueadas
+  milestones: [
+    {
+      id: 'tickets-bought',
+      icon: '🎫',
+      title: 'Passagens Compradas',
+      description: 'São Paulo → Dubai confirmado. Sem volta agora.',
+      date: 'Maio 2026',
+    },
+  ],
 } as const
