@@ -31,7 +31,7 @@ export const TRIP_CONFIG = {
   // Pode deixar como está ou trocar para quando você anunciou a viagem
   missionStartDate: new Date('2026-04-15T00:00:00-03:00'),
 
-  // Conquistas concluídas — adicione novas aqui conforme forem desbloqueadas
+  // Milestones — troque completed para true conforme forem conquistados
   milestones: [
     {
       id: 'tickets-bought',
@@ -39,6 +39,69 @@ export const TRIP_CONFIG = {
       title: 'Passagens Compradas',
       description: 'São Paulo → Dubai confirmado. Sem volta agora.',
       date: 'Maio 2026',
+      completed: true,
+      special: false,
+    },
+    {
+      id: 'passport-confirmed',
+      icon: '📘',
+      title: 'Passaporte Confirmado',
+      description: 'Documento válido, foto feia, missão liberada.',
+      date: 'Maio 2026',
+      completed: true,
+      special: false,
+    },
+    {
+      id: 'swimwear',
+      icon: '🩱',
+      title: 'Roupa de Piscina',
+      description: 'A piscina do hotel não vai saber o que vai acontecer.',
+      date: '',
+      completed: false,
+    },
+    {
+      id: 'sunscreen',
+      icon: '🧴',
+      title: 'Protetor Solar',
+      description: 'Dubai no verão. FPS 50. No mínimo.',
+      date: '',
+      completed: false,
+    },
+    {
+      id: 'doha-surprise',
+      icon: '🌙',
+      title: 'Destino Surpresa Desbloqueado',
+      description: '1 dia em Doha. Missão ficou épica antes mesmo de começar.',
+      date: 'Maio 2026',
+      completed: true,
+      special: true,
+    },
+    {
+      id: 'swimwear',
+      icon: '🩱',
+      title: 'Roupa de Piscina',
+      description: 'A piscina do hotel não vai saber o que vai acontecer.',
+      date: '',
+      completed: false,
+      special: false,
+    },
+    {
+      id: 'sunscreen',
+      icon: '🧴',
+      title: 'Protetor Solar',
+      description: 'Dubai no verão. FPS 50. No mínimo.',
+      date: '',
+      completed: false,
+      special: false,
+    },
+    {
+      id: 'bags-packed',
+      icon: '🧳',
+      title: 'Malas Prontas',
+      description: 'A mala fechou. A missão está quase completa.',
+      date: '',
+      completed: false,
+      special: false,
     },
   ],
 } as const
