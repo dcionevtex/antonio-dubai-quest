@@ -9,6 +9,7 @@ import { CountdownBlock } from './CountdownBlock'
 import { ProgressBar } from './ProgressBar'
 import { Messages } from './Messages'
 import { Milestones } from './Milestones'
+import { CollectibleCards } from './CollectibleCards'
 
 interface TimeLeft {
   days: number
@@ -256,6 +257,9 @@ export function ClientApp() {
               </div>
             ))}
           </section>
+
+          {/* ── Collectible Cards ─────────────────────────────────────── */}
+          <CollectibleCards />
 
           {/* ── Milestones ────────────────────────────────────────────── */}
           <Milestones />
