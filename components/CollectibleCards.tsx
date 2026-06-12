@@ -180,7 +180,7 @@ function CardFront({ onClick, rare }: { onClick: () => void; rare?: boolean }) {
   )
 }
 
-function CardBack({ card }: { card: Card }) {
+function CardBack({ card, onClick }: { card: Card; onClick: () => void }) {
   const isRare = !!card.rare
 
   const borderColor = isRare ? 'rgba(255,255,255,0.2)' : `${card.colorHex}40`
@@ -193,8 +193,9 @@ function CardBack({ card }: { card: Card }) {
 
   return (
     <div
-      className={`card-back flex flex-col${isRare ? ' card-rare-back' : ''}`}
+      className={`card-back flex flex-col cursor-pointer select-none${isRare ? ' card-rare-back' : ''}`}
       style={{ ...(isRare ? RARE_CARD_STYLE : CARD_STYLE), boxShadow: glowShadow }}
+      onClick={onClick}
     >
       {/* Header */}
       <div
@@ -289,9 +290,8 @@ function CardBack({ card }: { card: Card }) {
 export function CollectibleCards() {
   const [flipped, setFlipped] = useState(CARDS.map(() => false))
 
-  function open(i: number) {
-    if (flipped[i]) return
-    setFlipped(prev => prev.map((v, j) => (j === i ? true : v)))
+  function toggle(i: number) {
+    setFlipped(prev => prev.map((v, j) => (j === i ? !v : v)))
   }
 
   const openedCount = flipped.filter(Boolean).length
@@ -320,8 +320,8 @@ export function CollectibleCards() {
         {CARDS.map((card, i) => (
           <div key={card.id} className="card-chest">
             <div className={`card-inner${flipped[i] ? ' card-flipped' : ''}`}>
-              <CardFront onClick={() => open(i)} rare={card.rare} />
-              <CardBack card={card} />
+              <CardFront onClick={() => toggle(i)} rare={card.rare} />
+              <CardBack card={card} onClick={() => toggle(i)} />
             </div>
           </div>
         ))}
