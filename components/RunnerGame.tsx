@@ -49,50 +49,169 @@ function fresh(hi = 0, hiStars = 0): GS {
 
 // ── Static background ────────────────────────────────────────────
 function renderBg(ctx: CanvasRenderingContext2D) {
+  // Night sky gradient
   const grad = ctx.createLinearGradient(0, 0, 0, GY)
-  grad.addColorStop(0, '#07070f')
-  grad.addColorStop(1, '#130d25')
+  grad.addColorStop(0,    '#07070f')
+  grad.addColorStop(0.65, '#0d1020')
+  grad.addColorStop(1,    '#130d25')
   ctx.fillStyle = grad
   ctx.fillRect(0, 0, CW, GY)
 
-  // Moon
-  ctx.fillStyle = 'rgba(255,245,210,0.9)'
-  ctx.beginPath(); ctx.arc(682, 27, 18, 0, 2 * Math.PI); ctx.fill()
-  ctx.fillStyle = '#08080f'
-  ctx.beginPath(); ctx.arc(694, 22, 15, 0, 2 * Math.PI); ctx.fill()
+  // Subtle city-light amber glow at horizon
+  const glow = ctx.createLinearGradient(0, GY - 38, 0, GY)
+  glow.addColorStop(0, 'rgba(255,160,50,0)')
+  glow.addColorStop(1, 'rgba(255,160,50,0.06)')
+  ctx.fillStyle = glow
+  ctx.fillRect(0, GY - 38, CW, 38)
+
+  // Crescent moon (top right)
+  ctx.fillStyle = 'rgba(255,245,200,0.9)'
+  ctx.beginPath(); ctx.arc(720, 26, 19, 0, 2 * Math.PI); ctx.fill()
+  ctx.fillStyle = '#07070f'
+  ctx.beginPath(); ctx.arc(733, 20, 16, 0, 2 * Math.PI); ctx.fill()
 
   // Stars
-  ctx.fillStyle = 'rgba(255,255,255,0.55)'
+  ctx.fillStyle = 'rgba(255,255,255,0.5)'
   for (const [sx, sy] of [
-    [38,11],[98,6],[178,19],[255,10],[348,5],[428,17],
-    [528,9],[608,21],[718,12],[758,25],[68,29],[198,33],[478,23],
+    [26,10],[72,6],[128,18],[198,8],[286,5],[368,16],[448,10],
+    [528,20],[618,12],[708,22],[48,28],[148,31],[338,24],
+    [498,34],[658,26],[778,10],[98,15],[418,4],[258,28],
   ] as [number,number][]) ctx.fillRect(sx, sy, 2, 2)
 
-  ctx.fillStyle = '#0b0b20'
+  ctx.fillStyle = '#0b0b22'
 
-  // Burj Khalifa
-  const bk = 538
-  ctx.fillRect(bk + 6, 4, 4, 110)
-  ctx.fillRect(bk + 2, 60, 12, 40)
-  ctx.fillRect(bk - 2, 80, 20, 28)
-  ctx.fillRect(bk - 7, 92, 30, 18)
-  ctx.fillRect(bk - 13, 102, 42, GY - 102)
+  // ── LEFT CLUSTER: Dubai Marina towers ────────────────────────────
+  ctx.fillRect(0,   GY - 42, 20, 42)
+  ctx.fillRect(3,   GY - 46, 14,  5)
 
-  // Burj Al Arab
+  ctx.fillRect(24,  GY - 76, 14, 76)
+  ctx.fillRect(27,  GY - 82,  8,  7)
+  ctx.fillRect(30,  GY - 88,  4,  7)   // antenna
+
+  ctx.fillRect(42,  GY - 90, 28, 90)
   ctx.beginPath()
-  ctx.moveTo(282, GY); ctx.lineTo(286, 52); ctx.lineTo(316, 52); ctx.lineTo(320, GY)
-  ctx.fill()
+  ctx.moveTo(42, GY - 90); ctx.lineTo(56, GY - 104); ctx.lineTo(70, GY - 90)
+  ctx.closePath(); ctx.fill()
+  ctx.fillRect(54,  GY - 110,  4,  7)  // spire
+
+  ctx.fillRect(74,  GY - 52, 12, 52)
+
+  ctx.fillRect(90,  GY - 78, 16, 78)
+  ctx.fillRect(93,  GY - 84, 10,  7)
+  ctx.fillRect(96,  GY - 90,  4,  7)
+
+  ctx.fillRect(110, GY - 62, 22, 62)
+  ctx.fillRect(113, GY - 67, 16,  6)
+
+  ctx.fillRect(136, GY - 44, 16, 44)
+
+  // ── BURJ AL ARAB: the iconic sail-shaped hotel ───────────────────
+  const baa = 162
+  ctx.fillRect(baa,     GY - 108,  4, 108)   // spine / mast
+  ctx.fillRect(baa,     GY - 114,  4,   7)   // spire tip
+  ctx.fillRect(baa + 4, GY -  84, 20,   4)   // helipad platform
+  // Sail: billows rightward from spine
   ctx.beginPath()
-  ctx.moveTo(282, GY); ctx.lineTo(286, 52)
-  ctx.quadraticCurveTo(258, 110, 282, GY)
+  ctx.moveTo(baa + 3,      GY - 105)
+  ctx.quadraticCurveTo(baa + 72, GY - 52, baa + 58, GY)
+  ctx.lineTo(baa + 3, GY)
+  ctx.closePath()
   ctx.fill()
 
-  // City blocks
-  for (const [bx, bw, bh] of [
-    [0,35,68],[40,26,52],[70,44,82],[120,28,60],[154,38,75],
-    [196,22,46],[358,36,65],[400,28,55],[434,48,88],
-    [598,38,70],[644,28,52],[678,46,76],[730,24,48],[760,36,62],
-  ] as [number,number,number][]) ctx.fillRect(bx, GY - bh, bw, bh)
+  // ── MID-LEFT TOWERS: Downtown perimeter ──────────────────────────
+  ctx.fillRect(236, GY - 68, 20, 68)
+  ctx.fillRect(239, GY - 73, 14,  6)
+
+  ctx.fillRect(260, GY - 85, 24, 85)
+  ctx.beginPath()
+  ctx.moveTo(260, GY - 85); ctx.lineTo(272, GY - 98); ctx.lineTo(284, GY - 85)
+  ctx.closePath(); ctx.fill()
+  ctx.fillRect(270, GY - 104,  4,  7)
+
+  ctx.fillRect(288, GY - 58, 16, 58)
+
+  ctx.fillRect(308, GY - 76, 22, 76)
+  ctx.fillRect(311, GY - 82, 16,  7)
+  ctx.fillRect(314, GY - 89, 10,  8)
+
+  ctx.fillRect(334, GY - 96, 26, 96)
+  ctx.beginPath()
+  ctx.moveTo(334, GY - 96); ctx.lineTo(347, GY - 110); ctx.lineTo(360, GY - 96)
+  ctx.closePath(); ctx.fill()
+  ctx.fillRect(345, GY - 116,  4,  7)
+
+  ctx.fillRect(364, GY - 64, 18, 64)
+  ctx.fillRect(367, GY - 69, 12,  6)
+  ctx.fillRect(386, GY - 50, 18, 50)
+
+  // ── BURJ KHALIFA: multi-setback tapered tower ────────────────────
+  const bkX = 440
+  ctx.fillRect(bkX - 1,  GY - 155,  2, 30)   // ultra-thin spire
+  ctx.fillRect(bkX - 3,  GY - 125,  6, 20)   // upper shaft
+  ctx.fillRect(bkX - 6,  GY - 105, 12, 20)   // section 4
+  ctx.fillRect(bkX - 10, GY -  85, 20, 20)   // section 3
+  ctx.fillRect(bkX - 14, GY -  65, 28, 20)   // section 2
+  ctx.fillRect(bkX - 19, GY -  45, 38, 20)   // section 1
+  ctx.fillRect(bkX - 23, GY -  25, 46, 25)   // base plinth
+
+  // Address Downtown Hotel (left of BK)
+  ctx.fillRect(405, GY - 74, 22, 74)
+  ctx.fillRect(408, GY - 80, 16,  7)
+  ctx.fillRect(411, GY - 86, 10,  7)
+
+  // Downtown flanking towers (right of BK)
+  ctx.fillRect(490, GY - 60, 22, 60)
+  ctx.fillRect(493, GY - 65, 16,  6)
+  ctx.fillRect(516, GY - 46, 18, 46)
+
+  ctx.fillRect(538, GY - 72, 24, 72)
+  ctx.fillRect(541, GY - 78, 18,  7)
+  ctx.fillRect(544, GY - 85, 12,  8)
+
+  // ── EMIRATES TOWERS: two pointed triangular skyscrapers ──────────
+  const et1 = 568
+  ctx.fillRect(et1, GY - 98, 24, 98)
+  ctx.beginPath()
+  ctx.moveTo(et1, GY - 98); ctx.lineTo(et1 + 12, GY - 114); ctx.lineTo(et1 + 24, GY - 98)
+  ctx.closePath(); ctx.fill()
+  ctx.fillRect(et1 + 10, GY - 121,  4,  8)   // spire
+
+  const et2 = 600
+  ctx.fillRect(et2, GY - 82, 22, 82)
+  ctx.beginPath()
+  ctx.moveTo(et2, GY - 82); ctx.lineTo(et2 + 11, GY - 96); ctx.lineTo(et2 + 22, GY - 82)
+  ctx.closePath(); ctx.fill()
+  ctx.fillRect(et2 + 9, GY - 102,  4,  7)
+
+  ctx.fillRect(et1, GY - 28, et2 + 22 - et1, 28)   // shared ground podium
+
+  // ── MID-RIGHT BUILDINGS ───────────────────────────────────────────
+  ctx.fillRect(628, GY - 56, 18, 56)
+  ctx.fillRect(631, GY - 61, 12,  6)
+
+  ctx.fillRect(650, GY - 72, 22, 72)
+  ctx.fillRect(653, GY - 78, 16,  7)
+  ctx.fillRect(656, GY - 84, 10,  7)
+
+  ctx.fillRect(676, GY - 50, 16, 50)
+
+  // ── DUBAI FRAME: twin pillars + top beam (open centre) ───────────
+  ctx.fillRect(696, GY - 70,  9, 70)    // left pillar
+  ctx.fillRect(716, GY - 70,  9, 70)    // right pillar
+  ctx.fillRect(696, GY - 76, 29,  7)    // top connecting beam
+  ctx.fillStyle = '#0d1020'             // sky-toned cutout for the open frame
+  ctx.fillRect(705, GY - 69, 11, 62)
+  ctx.fillStyle = '#0b0b22'
+
+  // ── RIGHT EDGE ────────────────────────────────────────────────────
+  ctx.fillRect(730, GY - 54, 18, 54)
+  ctx.fillRect(733, GY - 59, 12,  6)
+
+  ctx.fillRect(752, GY - 42, 20, 42)
+
+  ctx.fillRect(776, GY - 62, 24, 62)
+  ctx.fillRect(779, GY - 68, 18,  7)
+  ctx.fillRect(782, GY - 74, 12,  7)
 }
 
 // ── Ground ───────────────────────────────────────────────────────
