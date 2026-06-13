@@ -161,6 +161,18 @@ body {
   100% { box-shadow: 0 0 18px rgba(255,215,0,0.5),  0 0 40px rgba(255,215,0,0.2); }
 }
 
+/* Birthday rare variant — extra pink pulse */
+.card-rare-back:has([style*="FF69B4"]),
+.card-birthday-glow {
+  animation: birthdayGlow 2s ease-in-out infinite;
+}
+@keyframes birthdayGlow {
+  0%   { box-shadow: 0 0 20px rgba(255,105,180,0.6), 0 0 50px rgba(255,105,180,0.25); }
+  33%  { box-shadow: 0 0 20px rgba(255,215,0,0.6),   0 0 50px rgba(255,215,0,0.25); }
+  66%  { box-shadow: 0 0 20px rgba(200,0,255,0.5),   0 0 50px rgba(200,0,255,0.2); }
+  100% { box-shadow: 0 0 20px rgba(255,105,180,0.6), 0 0 50px rgba(255,105,180,0.25); }
+}
+
 /* ─── Rare card: holographic shimmer overlay ────────────────────── */
 .card-holo-overlay {
   background: linear-gradient(

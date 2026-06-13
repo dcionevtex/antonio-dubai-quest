@@ -10,9 +10,9 @@ const S = 4            // pixel scale
 const CX = 80          // player fixed x
 const CHAR_W = 8 * S   // 32px
 const CHAR_H = 17 * S  // 68px
-const JUMP_VEL = -11
+const JUMP_VEL = -12
 const GRAVITY = 0.72
-const BASE_SPD = 5
+const BASE_SPD = 3
 
 type Status = 'idle' | 'playing' | 'dead'
 
@@ -183,9 +183,9 @@ function drawCamel(ctx: CanvasRenderingContext2D, ox: number) {
 // ── Collision ────────────────────────────────────────────────────
 function hits(cy: number, o: Obs): boolean {
   return (
-    CX + 6        < o.x + o.w &&
-    CX + CHAR_W - 6 > o.x &&
-    cy + CHAR_H - 4 > GY - o.h
+    CX + 12         < o.x + o.w - 4 &&
+    CX + CHAR_W - 12 > o.x + 4 &&
+    cy + CHAR_H - 10 > GY - o.h
   )
 }
 
@@ -232,7 +232,7 @@ export function RunnerGame() {
       if (gs.status === 'playing') {
         gs.tick++
         gs.frame++
-        gs.spd = BASE_SPD + gs.tick * 0.003
+        gs.spd = BASE_SPD + gs.tick * 0.0008
         gs.goff += gs.spd
         gs.score = Math.floor(gs.tick / 5)
 
@@ -248,8 +248,8 @@ export function RunnerGame() {
         // Spawn obstacle
         gs.nextObs--
         if (gs.nextObs <= 0) {
-          gs.obs.push({ x: CW + 10, w: 50, h: 32 + Math.random() * 16 })
-          gs.nextObs = 55 + Math.random() * 72
+          gs.obs.push({ x: CW + 10, w: 50, h: 24 + Math.random() * 10 })
+          gs.nextObs = 160 + Math.random() * 120
         }
 
         // Move + prune

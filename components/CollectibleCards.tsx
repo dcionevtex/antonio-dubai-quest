@@ -69,7 +69,20 @@ const CARDS: Card[] = [
     glowRgb: '255,215,0',
     rare: true,
   },
+  {
+    id: 7,
+    number: '07',
+    icon: '🎂',
+    title: 'FELIZ ANIVERSÁRIO!',
+    description: 'Vale um presente especial de aniversário!',
+    colorHex: '#FF69B4',
+    glowRgb: '255,105,180',
+    rare: true,
+  },
 ]
+
+const GRID_CARDS = CARDS.slice(0, 6)
+const BIRTHDAY_CARD = CARDS[6]
 
 // Standard gold foil border
 const CARD_STYLE = {
@@ -193,7 +206,7 @@ function CardBack({ card, onClick }: { card: Card; onClick: () => void }) {
 
   return (
     <div
-      className={`card-back flex flex-col cursor-pointer select-none${isRare ? ' card-rare-back' : ''}`}
+      className={`card-back flex flex-col cursor-pointer select-none${isRare ? ' card-rare-back' : ''}${card.glowRgb === '255,105,180' ? ' card-birthday-glow' : ''}`}
       style={{ ...(isRare ? RARE_CARD_STYLE : CARD_STYLE), boxShadow: glowShadow }}
       onClick={onClick}
     >
@@ -280,7 +293,7 @@ function CardBack({ card, onClick }: { card: Card; onClick: () => void }) {
           className={`font-pixel${isRare ? ' rare-text' : ' text-mc-text-dim'}`}
           style={{ fontSize: '5px' }}
         >
-          #{card.number}/06
+          #{card.number}/07
         </span>
       </div>
     </div>
@@ -296,6 +309,7 @@ export function CollectibleCards() {
 
   const openedCount = flipped.filter(Boolean).length
   const total = CARDS.length
+  const bdIdx = CARDS.indexOf(BIRTHDAY_CARD)
 
   return (
     <section className="animate-fade-in" style={{ animationDelay: '0.85s' }}>
@@ -316,8 +330,9 @@ export function CollectibleCards() {
           : 'Coleção completa!'}
       </div>
 
+      {/* Regular 6 cards */}
       <div className="grid grid-cols-3 gap-3 md:gap-4" style={{ gridAutoRows: '210px' }}>
-        {CARDS.map((card, i) => (
+        {GRID_CARDS.map((card, i) => (
           <div key={card.id} className="card-chest">
             <div className={`card-inner${flipped[i] ? ' card-flipped' : ''}`}>
               <CardFront onClick={() => toggle(i)} rare={card.rare} />
@@ -325,6 +340,24 @@ export function CollectibleCards() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Birthday card — centered, featured row */}
+      <div className="flex justify-center mt-3 md:mt-4">
+        <div className="w-full max-w-xs" style={{ height: '210px' }}>
+          <div
+            className="font-pixel text-center mb-2"
+            style={{ fontSize: '6px', letterSpacing: '0.15em' }}
+          >
+            <span className="rare-text">★ EDIÇÃO ESPECIAL ANIVERSÁRIO ★</span>
+          </div>
+          <div className="card-chest" style={{ height: '185px' }}>
+            <div className={`card-inner${flipped[bdIdx] ? ' card-flipped' : ''}`}>
+              <CardFront onClick={() => toggle(bdIdx)} rare />
+              <CardBack card={BIRTHDAY_CARD} onClick={() => toggle(bdIdx)} />
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )
