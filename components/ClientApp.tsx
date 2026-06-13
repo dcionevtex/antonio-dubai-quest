@@ -10,6 +10,7 @@ import { ProgressBar } from './ProgressBar'
 import { Messages } from './Messages'
 import { Milestones } from './Milestones'
 import { CollectibleCards } from './CollectibleCards'
+import { RunnerGame } from './RunnerGame'
 
 interface TimeLeft {
   days: number
@@ -260,6 +261,9 @@ export function ClientApp() {
 
           {/* ── Collectible Cards ─────────────────────────────────────── */}
           <CollectibleCards />
+
+          {/* ── Runner Game ───────────────────────────────────────────── */}
+          <RunnerGame />
 
           {/* ── Milestones ────────────────────────────────────────────── */}
           <Milestones />
